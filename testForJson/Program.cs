@@ -4,14 +4,14 @@ namespace testForJson;
 
 class TestForJsonArray
 {
-    public List<double> testArray = [1, 1];
+    public List<double> TestArray { get; set; } = [1, 1];
 }
 
 public class Program()
 {
     static void Main()
     {
-        string testString = @"{testArray : [2,2]}";
+        string testString = @"{TestArray : [2,2]}";
         Console.WriteLine($"{nameof(testString)}: {testString}");
         var testModel = JsonConvert.DeserializeObject<TestForJsonArray>(testString);
 
