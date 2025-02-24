@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace testForJson;
+﻿namespace testForJson;
 
 class TestForJsonArray
 {
@@ -11,11 +9,16 @@ public class Program()
 {
     static void Main()
     {
-        string testString = @"{TestArray : [2,2]}";
+        string testString = "{\"TestArray\" : [2,2]}";
         Console.WriteLine($"{nameof(testString)}: {testString}");
-        var testModel = JsonConvert.DeserializeObject<TestForJsonArray>(testString);
+        var testModel1 = System.Text.Json.JsonSerializer.Deserialize<TestForJsonArray>(testString);
+        string testModelString1 = System.Text.Json.JsonSerializer.Serialize(testModel1);
+        Console.WriteLine($"{nameof(testModelString1)}: {testModelString1}");
 
-        string testModelString = JsonConvert.SerializeObject(testModel);
-        Console.WriteLine($"{nameof(testModelString)}: {testModelString}");
+        var testModel2 = Newtonsoft.Json.JsonConvert.DeserializeObject<TestForJsonArray>(
+            testString
+        );
+        string testModelString2 = Newtonsoft.Json.JsonConvert.SerializeObject(testModel2);
+        Console.WriteLine($"{nameof(testModelString2)}: {testModelString2}");
     }
 }
